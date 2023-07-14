@@ -365,7 +365,7 @@ public class CreateRfq {
 	        File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 
 	        String subfolderName = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-	        String subfolderPath = "D:\\Automation\\BQAutomationfrmaework\\Screen captured\\" + subfolderName;
+	        String subfolderPath = "D:\\Automation\\Screen captured\\" + subfolderName;
 
 	        File subfolder = new File(subfolderPath);
 	        if (!subfolder.exists()) {
