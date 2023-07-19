@@ -20,6 +20,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
@@ -56,36 +57,39 @@ public class CreateRfq {
         driver.navigate().refresh(); 
        
 
-     
+     /*
         driver.get(prop.getProperty("umgbaseurl"));//comment umg
 		driver.findElement(By.xpath("//*[@id=\"details-button\"]")).click();//comment umg
 		driver.findElement(By.xpath("//*[@id=\"proceed-link\"]")).click();//comment umg
 		driver.findElement(By.id("inputEmail")).sendKeys(prop.getProperty("umgusername"));//comment umg
 		driver.findElement(By.id("inputPassword")).sendKeys(prop.getProperty("umgpasswrd"));//comment umg
+*/
 
-
-        /*driver.get(prop.getProperty("baseurl"));//
+        driver.get(prop.getProperty("baseurl"));//
         driver.findElement(By.id("inputEmail")).sendKeys(prop.getProperty("username"));//
 		driver.findElement(By.id("inputPassword")).sendKeys(prop.getProperty("passwrd"));//
-*/		
 		
-		Wait<WebDriver> wait = new FluentWait<>(driver)
-                .withTimeout(Duration.ofSeconds(10))
-                .pollingEvery(Duration.ofMillis(500))
-                .ignoring(org.openqa.selenium.NoSuchElementException.class);
-    WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button")));
-    
+		
 		driver.findElement(By.xpath("//button")).click();
-		Thread.sleep(3000);
+		
+	
+		Thread.sleep(8000);
+		WebElement element = driver.findElement(By.xpath("//button"));
+		Actions actions = new Actions(driver);
+		actions.click(element).build().perform();
+		
+		
+		/*driver.findElement(By.xpath("//button")).click();*/
+		
+		
+		
+		Thread.sleep(4000);
 
 		
-		/*driver.findElement(By.xpath("//*[@id=\"details-button\"]")).click();//comment umg
-		driver.findElement(By.xpath("//*[@id=\"proceed-link\"]")).click();//comment umg
-*/		
-		Thread.sleep(1000);
 
 		// Create R.F.Q
-		Thread.sleep(1000);
+		Thread.sleep(4000);
+		
 		driver.findElement(By.xpath("//*[@id=\"body-row\"]/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/button[2]/span")).click();
 
 		driver.navigate().refresh(); // Perform a hard refresh

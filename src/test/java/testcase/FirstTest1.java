@@ -48,7 +48,15 @@ public class FirstTest1 {
 		driver.findElement(By.xpath("//*[@id=\"proceed-link\"]")).click();//comment umg
 */		driver.findElement(By.id("inputEmail")).sendKeys(prop.getProperty("username"));//
 		driver.findElement(By.id("inputPassword")).sendKeys(prop.getProperty("passwrd"));//
+		
 		driver.findElement(By.xpath("//button")).click();
+		
+	
+		Thread.sleep(8000);
+		WebElement element = driver.findElement(By.xpath("//button"));
+		Actions actions = new Actions(driver);
+		actions.click(element).build().perform();
+		
 		Thread.sleep(4000);
 
 	/*	driver.findElement(By.xpath("//*[@id=\"details-button\"]")).click();//comment umg

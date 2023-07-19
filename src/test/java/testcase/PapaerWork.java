@@ -9,6 +9,7 @@ import java.util.Properties;
 import java.util.Random;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -40,26 +41,31 @@ public class PapaerWork {
         WebDriver driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         
-		driver.get(prop.getProperty("umgbaseurl"));//comment umg
+/*		driver.get(prop.getProperty("umgbaseurl"));//comment umg
 		driver.findElement(By.xpath("//*[@id=\"details-button\"]")).click();//comment umg
 		driver.findElement(By.xpath("//*[@id=\"proceed-link\"]")).click();//comment umg
 		driver.findElement(By.id("inputEmail")).sendKeys(prop.getProperty("umgusername"));//comment umg
 		driver.findElement(By.id("inputPassword")).sendKeys(prop.getProperty("umgpasswrd"));//comment umg
+*/		
 		
-		
-		/*driver.get(prop.getProperty("baseurl"));
+		driver.get(prop.getProperty("baseurl"));
 	    driver.findElement(By.id("inputEmail")).sendKeys(prop.getProperty("username"));
-		driver.findElement(By.id("inputPassword")).sendKeys(prop.getProperty("passwrd"));*/
-		driver.findElement(By.xpath("//button")).click();
-		Thread.sleep(4000);
+		driver.findElement(By.id("inputPassword")).sendKeys(prop.getProperty("passwrd"));
 		
-		   Wait<WebDriver> wait = new FluentWait<>(driver)
-	                .withTimeout(Duration.ofSeconds(10))
-	                .pollingEvery(Duration.ofMillis(500))
-	                .ignoring(org.openqa.selenium.NoSuchElementException.class);
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='customerQuotationsTable_filter']/label/input")));
-        
-		driver.findElement(By.xpath("//*[@id=\"customerQuotationsTable_filter\"]/label/input")).sendKeys(prop.getProperty("jobid"));
+		
+		
+		driver.findElement(By.xpath("//button")).click();
+		
+	
+		Thread.sleep(8000);
+		WebElement element = driver.findElement(By.xpath("//button"));
+		Actions actions = new Actions(driver);
+		actions.click(element).build().perform();
+		
+		
+
+		Thread.sleep(4000);
+		   driver.findElement(By.xpath("//*[@id=\"customerQuotationsTable_filter\"]/label/input")).sendKeys(prop.getProperty("jobid"));
 		
 		driver.navigate().refresh(); 
 	       

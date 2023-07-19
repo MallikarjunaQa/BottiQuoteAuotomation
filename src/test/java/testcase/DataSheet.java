@@ -1,12 +1,12 @@
 package testcase;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -39,21 +39,38 @@ public class DataSheet {
         driver.manage().deleteAllCookies(); // Delete all cookies
         driver.navigate().refresh(); 
         
-        
+        /*
         driver.get(prop.getProperty("umgbaseurl"));//comment umg
 		driver.findElement(By.xpath("//*[@id=\"details-button\"]")).click();//comment umg
 		driver.findElement(By.xpath("//*[@id=\"proceed-link\"]")).click();//comment umg
 		driver.findElement(By.id("inputEmail")).sendKeys(prop.getProperty("umgusername"));//comment umg
 		driver.findElement(By.id("inputPassword")).sendKeys(prop.getProperty("umgpasswrd"));//comment umg
-		
+*/		
         
-       /* 
+        
         driver.get(prop.getProperty("baseurl"));
-	    driver.findElement(By.id("inputEmail")).sendKeys(prop.getProperty("username"));
-		driver.findElement(By.id("inputPassword")).sendKeys(prop.getProperty("passwrd"));*/
+        WebElement username =  driver.findElement(By.id("inputEmail"));
+        username.clear();
+        username.sendKeys(prop.getProperty("username"));
+        WebElement passwrd = driver.findElement(By.id("inputPassword"));
+        passwrd.clear();
+        passwrd.sendKeys(prop.getProperty("passwrd"));
 		
+        WebElement button=driver.findElement(By.xpath("//button"));
+        
+    	
 		driver.findElement(By.xpath("//button")).click();
-		Thread.sleep(4000);
+		
+	
+		Thread.sleep(8000);
+		WebElement element = driver.findElement(By.xpath("//button"));
+		Actions actions = new Actions(driver);
+		actions.click(element).build().perform();
+		
+
+        
+        
+		Thread.sleep(30000);
 		driver.findElement(By.xpath("//*[@id=\"customerQuotationsTable_filter\"]/label/input")).sendKeys(prop.getProperty("jobid"));
 		Thread.sleep(4000);
 		driver.findElement(By.xpath("//span[@title='Datasheet']")).click();
