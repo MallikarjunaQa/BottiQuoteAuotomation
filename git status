@@ -1,0 +1,115 @@
+[1mdiff --git a/src/test/java/testcase/FirstTest1.java b/src/test/java/testcase/FirstTest1.java[m
+[1mindex 0d1a693..2c6f30f 100644[m
+[1m--- a/src/test/java/testcase/FirstTest1.java[m
+[1m+++ b/src/test/java/testcase/FirstTest1.java[m
+[36m@@ -1,6 +1,5 @@[m
+ package testcase;[m
+ [m
+[31m-import java.awt.geom.Arc2D.Float;[m
+ import java.io.FileReader;[m
+ import java.io.IOException;[m
+ import java.math.BigDecimal;[m
+[36m@@ -22,7 +21,6 @@[m [mimport org.openqa.selenium.chrome.ChromeDriver;[m
+ import org.openqa.selenium.chrome.ChromeOptions;[m
+ import org.openqa.selenium.interactions.Actions;[m
+ import org.openqa.selenium.support.ui.Select;[m
+[31m-import base.BaseTest;[m
+ import io.github.bonigarcia.wdm.WebDriverManager;[m
+ [m
+ public class FirstTest1 {[m
+[36m@@ -71,92 +69,8 @@[m [mpublic class FirstTest1 {[m
+ [m
+ 		// Create R.F.Q[m
+ 		[m
+[31m-		driver.findElement(By.xpath("//*[@id=\"body-row\"]/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/button[2]/span")).click();[m
+[31m-		WebElement AccNum = driver.findElement(By.id("customerAccountNo"));[m
+[31m-		AccNum.sendKeys("7539");[m
+[31m-		AccNum.sendKeys(Keys.ARROW_DOWN);[m
+[31m-		AccNum.sendKeys(Keys.ENTER);[m
+[31m-		driver.findElement(By.xpath("//*[@id=\"calculationType\"]")).sendKeys("SAP");[m
+[31m-		driver.findElement(By.xpath("//*[@id=\"enquiryNumber\"]")).sendKeys("test123");[m
+[31m-		[m
+[31m-		driver.findElement(By.xpath("//*[@id=\"drawingNumber\"]")).sendKeys("test123");[m
+[31m-		driver.findElement(By.xpath("//*[@id=\"custRFQDocumentationType\"]")).sendKeys("Data (Gerber,ODB,etc.)");[m
+[31m-		driver.findElement(By.xpath("//*[@id=\"quantity\"]")).sendKeys("120");[m
+[31m-		driver.findElement(By.xpath("//*[@id=\"materialNo\"]")).sendKeys((prop.getProperty("jobid")));[m
+[31m-[m
+[31m-		Thread.sleep(4000);[m
+[31m-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);[m
+[31m-[m
+[31m-		driver.findElement(By.xpath("//*[@id=\"salesInformation\"]")).sendKeys((prop.getProperty("comment")));[m
+[31m-		driver.findElement(By.xpath("//*[@id=\"createComment\"]")).sendKeys((prop.getProperty("comment")));[m
+[31m-		[m
+[31m-[m
+ 	[m
+ 		[m
+[31m-		//////////////////////////////////////////////[m
+[31m-		[m
+[31m-		[m
+[31m-		String date1=driver.findElement(By.xpath("//*[@id=\"enquiryDate\"]")).getAttribute("value");[m
+[31m-		System.out.println("rfq Inquiry Date" + date1); [m
+[31m-		[m
+[31m-		Date date = new Date();[m
+[31m-		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");[m
+[31m-		String str = formatter.format(date);[m
+[31m-		/*System.out.println("system fetch date; "+str);*/[m
+[31m-	[m
+[31m-		[m
+[31m-		[m
+[31m-		if (date1.compareTo(str) == 0) {[m
+[31m-			System.out.println("job created today: hence today date: Inquiry Date correct");[m
+[31m-		}[m
+[31m-		[m
+[31m-[m
+[31m-		//Due Date Unimicron to Customer, 4 days adhed from date create[m
+[31m-		[m
+[31m-		String date2=driver.findElement(By.xpath("//*[@id=\"dueDateUnimToCustm\"]")).getAttribute("value");[m
+[31m-		/*System.out.println("Rfq; Due Date Unimicron to Customer "+ date2);*/[m
+[31m-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");[m
+[31m-		Calendar c = Calendar.getInstance();[m
+[31m-	    c.add(Calendar.DATE, 4); // Adding 4 days[m
+[31m-		String output = sdf.format(c.getTime());[m
+[31m-		/*System.out.println("stystem deduct 4 days Due Date Unimicron to Customer" + output);*/[m
+[31m-		[m
+[31m-		if (date2.compareTo(output) == 0) {[m
+[31m-			System.out.println("Due date Umg to costomer :correct in normal condiation");[m
+[31m-		}else[m
+[31m-		{[m
+[31m-			System.out.println("Due date Umg to costomer :Incorrect in normal condiation");[m
+[31m-		}[m
+[31m-		[m
+[31m-		[m
+[31m-		//in qta status date should diff of 1 day[m
+[31m-		[m
+[31m-		driver.findElement(By.xpath("//*[@id=\"priority\"]")).sendKeys("qta");[m
+[31m-		String date3=driver.findElement(By.xpath("//*[@id=\"dueDateUnimToCustm\"]")).getAttribute("value");[m
+[31m-		/*System.out.println("rfQ qta status " +date3);*/[m
+[31m-		[m
+[31m-		SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");[m
+[31m-		Calendar c2 = Calendar.getInstance();[m
+[31m-	    c.add(Calendar.DATE, -3); // Adding 1 days[m
+[31m-		String output2 = sdf2.format(c.getTime());[m
+[31m-		/*System.out.println("stystem deduct 1 days at qta Due Date Unimicron to Customer"+ output2);*/[m
+[31m-		[m
+[31m-		if (date3.compareTo(output2) == 0) {[m
+[31m-			System.out.println("Due date Umg to costomer :correct in Qta condiation");[m
+[31m-		}else[m
+[31m-		{[m
+[31m-			System.out.println("Due date Umg to costomer :incorrect in Qta condiation");[m
+[31m-		}[m
+[31m-		[m
+[31m-		//	Due Date NCS to Unimicron[m
+[31m-		String date4=driver.findElement(By.xpath("//*[@id=\"dueDateNcsToUnim\"]")).getAttribute("value");[m
+[31m-		if (date4.compareTo(output2) == 0) {[m
+[31m-			System.out.println("Due Date NCS to Unimicron :correct");[m
+[31m-		}else[m
+[31m-		{[m
+[31m-			System.out.println("Due Date NCS to Unimicron :incorrect");[m
+[31m-		}[m
+[31m-		[m
+ 		///////////////////////////////////////[m
+ [m
+ 		// Edit R.F.Q ( Search and Edit)[m
+[1mdiff --git a/target/test-classes/testcase/FirstTest1.class b/target/test-classes/testcase/FirstTest1.class[m
+[1mindex 7a71c03..761faba 100644[m
+Binary files a/target/test-classes/testcase/FirstTest1.class and b/target/test-classes/testcase/FirstTest1.class differ

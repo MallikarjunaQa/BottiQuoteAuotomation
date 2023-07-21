@@ -1,6 +1,5 @@
 package testcase;
 
-import java.awt.geom.Arc2D.Float;
 import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -22,7 +21,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
-import base.BaseTest;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class FirstTest1 {
@@ -71,91 +69,7 @@ public class FirstTest1 {
 
 		// Create R.F.Q
 		
-		driver.findElement(By.xpath("//*[@id=\"body-row\"]/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/button[2]/span")).click();
-		WebElement AccNum = driver.findElement(By.id("customerAccountNo"));
-		AccNum.sendKeys("7539");
-		AccNum.sendKeys(Keys.ARROW_DOWN);
-		AccNum.sendKeys(Keys.ENTER);
-		driver.findElement(By.xpath("//*[@id=\"calculationType\"]")).sendKeys("SAP");
-		driver.findElement(By.xpath("//*[@id=\"enquiryNumber\"]")).sendKeys("test123");
-		
-		driver.findElement(By.xpath("//*[@id=\"drawingNumber\"]")).sendKeys("test123");
-		driver.findElement(By.xpath("//*[@id=\"custRFQDocumentationType\"]")).sendKeys("Data (Gerber,ODB,etc.)");
-		driver.findElement(By.xpath("//*[@id=\"quantity\"]")).sendKeys("120");
-		driver.findElement(By.xpath("//*[@id=\"materialNo\"]")).sendKeys((prop.getProperty("jobid")));
-
-		Thread.sleep(4000);
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-		driver.findElement(By.xpath("//*[@id=\"salesInformation\"]")).sendKeys((prop.getProperty("comment")));
-		driver.findElement(By.xpath("//*[@id=\"createComment\"]")).sendKeys((prop.getProperty("comment")));
-		
-
 	
-		
-		//////////////////////////////////////////////
-		
-		
-		String date1=driver.findElement(By.xpath("//*[@id=\"enquiryDate\"]")).getAttribute("value");
-		System.out.println("rfq Inquiry Date" + date1); 
-		
-		Date date = new Date();
-		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-		String str = formatter.format(date);
-		/*System.out.println("system fetch date; "+str);*/
-	
-		
-		
-		if (date1.compareTo(str) == 0) {
-			System.out.println("job created today: hence today date: Inquiry Date correct");
-		}
-		
-
-		//Due Date Unimicron to Customer, 4 days adhed from date create
-		
-		String date2=driver.findElement(By.xpath("//*[@id=\"dueDateUnimToCustm\"]")).getAttribute("value");
-		/*System.out.println("Rfq; Due Date Unimicron to Customer "+ date2);*/
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		Calendar c = Calendar.getInstance();
-	    c.add(Calendar.DATE, 4); // Adding 4 days
-		String output = sdf.format(c.getTime());
-		/*System.out.println("stystem deduct 4 days Due Date Unimicron to Customer" + output);*/
-		
-		if (date2.compareTo(output) == 0) {
-			System.out.println("Due date Umg to costomer :correct in normal condiation");
-		}else
-		{
-			System.out.println("Due date Umg to costomer :Incorrect in normal condiation");
-		}
-		
-		
-		//in qta status date should diff of 1 day
-		
-		driver.findElement(By.xpath("//*[@id=\"priority\"]")).sendKeys("qta");
-		String date3=driver.findElement(By.xpath("//*[@id=\"dueDateUnimToCustm\"]")).getAttribute("value");
-		/*System.out.println("rfQ qta status " +date3);*/
-		
-		SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
-		Calendar c2 = Calendar.getInstance();
-	    c.add(Calendar.DATE, -3); // Adding 1 days
-		String output2 = sdf2.format(c.getTime());
-		/*System.out.println("stystem deduct 1 days at qta Due Date Unimicron to Customer"+ output2);*/
-		
-		if (date3.compareTo(output2) == 0) {
-			System.out.println("Due date Umg to costomer :correct in Qta condiation");
-		}else
-		{
-			System.out.println("Due date Umg to costomer :incorrect in Qta condiation");
-		}
-		
-		//	Due Date NCS to Unimicron
-		String date4=driver.findElement(By.xpath("//*[@id=\"dueDateNcsToUnim\"]")).getAttribute("value");
-		if (date4.compareTo(output2) == 0) {
-			System.out.println("Due Date NCS to Unimicron :correct");
-		}else
-		{
-			System.out.println("Due Date NCS to Unimicron :incorrect");
-		}
 		
 		///////////////////////////////////////
 
