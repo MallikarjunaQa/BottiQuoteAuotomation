@@ -328,16 +328,16 @@ public class CreateRfq {
 	          
 
 	            // Upload PDF file
-	            uploadFile(driver, "D:\\Automation\\BQAutomationfrmaework\\Screen captured\\UploadToBrowse\\7071493_1.pdf");
+	            uploadFile(driver, "D:\\Automation\\Screen captured\\UploadToBrowse\\DraftQuote.pdf");
 
 	            // Upload txt file
-	            uploadFile(driver, "D:\\Automation\\BQAutomationfrmaework\\Screen captured\\UploadToBrowse\\undefined (1).txt");
+	            uploadFile(driver, "D:\\Automation\\Screen captured\\UploadToBrowse\\undefined (1).txt");
 
 	            // Upload ZIP file
-	            uploadFile(driver, "D:\\Automation\\BQAutomationfrmaework\\Screen captured\\UploadToBrowse\\OrderAttachments_292_7072277_1_1684907287149.zip");
+	            uploadFile(driver, "D:\\Automation\\Screen captured\\UploadToBrowse\\OrderAttachments.zip");
 
 	            // Upload Excel file
-	            uploadFile(driver, "D:\\Automation\\BQAutomationfrmaework\\Screen captured\\UploadToBrowse\\Book1.xlsx");
+	            uploadFile(driver, "D:\\Automation\\Screen captured\\UploadToBrowse\\3000125_1.xlsx");
 
 	           
 	        } catch (Exception e) {
