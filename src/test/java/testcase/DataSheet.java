@@ -55,22 +55,11 @@ public class DataSheet {
         WebElement passwrd = driver.findElement(By.id("inputPassword"));
         passwrd.clear();
         passwrd.sendKeys(prop.getProperty("passwrd"));
-		
         WebElement button=driver.findElement(By.xpath("//button"));
-        
-    	
 		driver.findElement(By.xpath("//button")).click();
-		
-	
-		Thread.sleep(8000);
-		WebElement element = driver.findElement(By.xpath("//button"));
-		Actions actions = new Actions(driver);
-		actions.click(element).build().perform();
-		
 
-        
-        
-		Thread.sleep(30000);
+		
+		Thread.sleep(4000);
 		driver.findElement(By.xpath("//*[@id=\"customerQuotationsTable_filter\"]/label/input")).sendKeys(prop.getProperty("jobid"));
 		Thread.sleep(4000);
 		driver.findElement(By.xpath("//span[@title='Datasheet']")).click();
@@ -80,7 +69,6 @@ public class DataSheet {
 		
         
         int scroll = 1;
-
 		do {
 			Actions act = new Actions(driver);
 			act.sendKeys(Keys.PAGE_DOWN).build().perform();

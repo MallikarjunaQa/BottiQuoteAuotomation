@@ -1,95 +1,87 @@
 package testcase;
 
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.text.PDFTextStripper;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Properties;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class PDFToExcel {
+
+	public static Properties prop = new Properties();
+	public static FileReader fr;
 	
 	
-    public static void main(String[] args) {
-        String pdfPath = "‪D:\\empb\\DraftQuote.pdf";
-        String excelPath = "‪D:\\empb\\Book1.xlsx";
-        String worksheetName = "Sheet1";
-        int startRow = 1; // Assuming data starts from row 2
-        int columnNumber = 1; // Column number (A=1, B=2, C=3, ...)
 
-        try {
-            // Extract data from PDF column
-            List<String> data = extractDataFromPDF(pdfPath, columnNumber);
+	public static void main(String[] args) throws InterruptedException, IOException  {
 
-            // Update Excel with the extracted data
-            updateExcelWithValues(excelPath, worksheetName, data, startRow, columnNumber);
+		FileReader fr = new FileReader("D:\\Automation\\BQAutomationfrmaework\\src\\test\\resources\\configurations\\config.properties");
+		prop.load(fr);
+		
+		ChromeOptions options = new ChromeOptions();
+		WebDriverManager.chromedriver().setup();
+		options.addArguments("--remote-allow-origins=*");
+        WebDriver driver = new ChromeDriver(options);
+        driver.manage().window().maximize();
+        
 
-            System.out.println("Data extracted and updated in Excel successfully.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+		driver.get(prop.getProperty("baseurl"));//	driver.findElement(By.id("inputEmail")).sendKeys(prop.getProperty("username"));//
+		driver.findElement(By.id("inputEmail")).sendKeys(prop.getProperty("username"));
+		driver.findElement(By.id("inputPassword")).sendKeys(prop.getProperty("passwrd"));
+		
+		driver.findElement(By.xpath("//button")).click();
 
-    private static List<String> extractDataFromPDF(String pdfPath, int columnNumber) throws IOException {
-        PDDocument document = PDDocument.load(new File(pdfPath));
-        PDFTextStripper textStripper = new PDFTextStripper();
+		Thread.sleep(5000);
+		
+		
+		// clear all botton 
+		driver.findElement(By.xpath("//*[@id=\"customerQuotationsTable_filter\"]/label/input")).sendKeys((prop.getProperty("jobid")));
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//*[@id=\"body-row\"]/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/button[3]")).click();
+	
+		Thread.sleep(2000);
+		
+		// check final print taken or not to naviagte Po page
+		driver.findElement(By.xpath("//*[@id=\"customerQuotationsTable_filter\"]/label/input")).sendKeys("7072087_1");
+		Thread.sleep(1000);
+		 WebElement statusElement = driver.findElement(By.xpath("//*[@id=\"customerQuotationsTable\"]/tbody/tr/td[8]"));
+		 String status = statusElement.getText();
+		 System.out.println(status);
+		 if (status.equalsIgnoreCase("Closed")) {
+	     WebElement plusIcon = driver.findElement(By.xpath("\r\n" + "\r\n" +"//*[@id=\"customerQuotationsTable\"]/tbody/tr/td[12]/div[2]/div[2]/span"));
+	     plusIcon.click();
+		   }
+		 else {
+			 System.out.println("close the order by clicking the 'Final Print' button on the calculation page");
+		 }
+		 
+		 //expand side nav bar 
+		
+		 try {
+	            // Replace these with the appropriate locators for your elements
+			 WebElement plusIcon1 = driver.findElement(By.xpath("//*[@id=\\\"sidebar-container\\\"]/ul/a[1]/div"));
+			 WebElement plusIcon2 = driver.findElement(By.xpath("//*[@id=\\\"actionListDiv\\\"]/a[6]/div/span[2]/span[1]"));
+			 plusIcon1.click();
+			 plusIcon2.click();
+	            System.out.println("Both elements are clickable and have been clicked.");
+	        } catch (Exception e) {
+	            System.out.println("One or both elements are not clickable or an error occurred.");
+	        }
 
-        // Set the column region in PDF (adjust coordinates as needed)
-        int left = 100; // Left x-coordinate of the column region
-        int right = 200; // Right x-coordinate of the column region
+		 
+		 
+		 
+		/*driver .quit();
+		*/
+	}
 
-        // Set the page(s) to extract data from (e.g., 1-5)
-        textStripper.setStartPage(1);
-        textStripper.setEndPage(5);
-
-        // Extract the text from the specified column region
-        String text = textStripper.getText(document);
-
-        document.close();
-
-        // Split the text into lines and extract the desired column
-        String[] lines = text.split("\\r?\\n");
-        List<String> data = new ArrayList<>();
-        for (String line : lines) {
-            String[] columns = line.split("\\s+"); // Split by whitespace
-            if (columns.length >= columnNumber) {
-                String value = columns[columnNumber - 1].trim();
-                data.add(value);
-            }
-        }
-
-        return data;
-    }
-
-    private static void updateExcelWithValues(String excelPath, String worksheetName, List<String> data,
-                                              int startRow, int columnNumber) throws IOException {
-        FileInputStream inputStream = new FileInputStream(excelPath);
-        Workbook workbook = new XSSFWorkbook(inputStream);
-        Sheet sheet = workbook.getSheet(worksheetName);
-
-        int row = startRow;
-        for (String value : data) {
-            Row currentRow = sheet.getRow(row);
-            if (currentRow == null) {
-                currentRow = sheet.createRow(row);
-            }
-
-            Cell cell = currentRow.getCell(columnNumber - 1, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
-            cell.setCellValue(value);
-
-            row++;
-        }
-
-        inputStream.close();
-
-        FileOutputStream outputStream = new FileOutputStream(excelPath);
-        workbook.write(outputStream);
-        workbook.close();
-        outputStream.close();
-    }
 }
+
+		

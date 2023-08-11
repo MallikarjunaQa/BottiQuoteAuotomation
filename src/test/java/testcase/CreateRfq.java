@@ -12,6 +12,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
+
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
@@ -53,18 +55,17 @@ public class CreateRfq {
         options.addArguments("disk-cache-size=0"); // Set disk cache size to 0
         options.addArguments("media-cache-size=0"); // Set media cache size to 0
 
-        driver.manage().deleteAllCookies(); // Delete all cookies
+        driver.manage().deleteAllCookies(); // Delete all cookies....
         driver.navigate().refresh(); 
-       
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-     /*
-        driver.get(prop.getProperty("umgbaseurl"));//comment umg
-		driver.findElement(By.xpath("//*[@id=\"details-button\"]")).click();//comment umg
-		driver.findElement(By.xpath("//*[@id=\"proceed-link\"]")).click();//comment umg
-		driver.findElement(By.id("inputEmail")).sendKeys(prop.getProperty("umgusername"));//comment umg
-		driver.findElement(By.id("inputPassword")).sendKeys(prop.getProperty("umgpasswrd"));//comment umg
-*/
+//        driver.get(prop.getProperty("umgbaseurl"));//comment umg
+//		driver.findElement(By.xpath("//*[@id=\"details-button\"]")).click();//comment umg
+//		driver.findElement(By.xpath("//*[@id=\"proceed-link\"]")).click();//comment umg
+//		driver.findElement(By.id("inputEmail")).sendKeys(prop.getProperty("umgusername"));//comment umg
+//		driver.findElement(By.id("inputPassword")).sendKeys(prop.getProperty("umgpasswrd"));//comment umg
 
+		Thread.sleep(8000);
         driver.get(prop.getProperty("baseurl"));//
         driver.findElement(By.id("inputEmail")).sendKeys(prop.getProperty("username"));//
 		driver.findElement(By.id("inputPassword")).sendKeys(prop.getProperty("passwrd"));//
@@ -72,21 +73,6 @@ public class CreateRfq {
 		
 		driver.findElement(By.xpath("//button")).click();
 		
-	
-		Thread.sleep(8000);
-		WebElement element = driver.findElement(By.xpath("//button"));
-		Actions actions = new Actions(driver);
-		actions.click(element).build().perform();
-		
-		
-		/*driver.findElement(By.xpath("//button")).click();*/
-		
-		
-		
-		Thread.sleep(4000);
-
-		
-
 		// Create R.F.Q
 		Thread.sleep(4000);
 		
@@ -121,7 +107,7 @@ public class CreateRfq {
         Select select = new Select(Calculationtype);
         List<WebElement> options1 = select.getOptions();
         int numberOfOptionsToSelect = 2;
-        
+        Thread.sleep(4000);
         Random random1 = new Random();
         for (int i = 1; i < numberOfOptionsToSelect; i++) {
             int randomIndex = random1.nextInt(options1.size());
@@ -163,7 +149,6 @@ public class CreateRfq {
             select1.selectByIndex(randomIndex1);
         }
         
-	     
 	    //Send random number grater than 500 to 2000 to Quantity / Year
 		 driver.findElement(By.xpath("//*[@id=\"quantity\"]")).sendKeys(getRandomOption(500, 2000));
 		 
@@ -346,15 +331,11 @@ public class CreateRfq {
 	        	//out of block 
 	        }
 	        
-	        
               //save button 
-	        
 		     WebElement saveButton1 = driver.findElement(By.xpath("//*[@id=\"newOrderSave\"]/i"));
 		     saveButton1.click();
 		     System.out.println("order saved");
 	  	
-	        
-		
 	}
 
 	

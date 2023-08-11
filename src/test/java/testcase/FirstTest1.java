@@ -45,48 +45,21 @@ public class FirstTest1 {
 		/*driver.findElement(By.xpath("//*[@id=\"details-button\"]")).click();//comment umg
 		driver.findElement(By.xpath("//*[@id=\"proceed-link\"]")).click();//comment umg
 */		driver.findElement(By.id("inputEmail")).sendKeys(prop.getProperty("username"));//
-		driver.findElement(By.id("inputPassword")).sendKeys(prop.getProperty("passwrd"));//
+        driver.findElement(By.id("inputPassword")).sendKeys(prop.getProperty("passwrd"));
 		
 		driver.findElement(By.xpath("//button")).click();
 		
-	
-		Thread.sleep(8000);
-		WebElement element = driver.findElement(By.xpath("//button"));
-		Actions actions = new Actions(driver);
-		actions.click(element).build().perform();
-		
-		Thread.sleep(4000);
+		Thread.sleep(5000);
 
 	/*	driver.findElement(By.xpath("//*[@id=\"details-button\"]")).click();//comment umg
 		driver.findElement(By.xpath("//*[@id=\"proceed-link\"]")).click();//comment umg
 */		
-		Thread.sleep(2000);
-	
-	/*	driver.findElement(By.id("inputEmail")).sendKeys((prop.getProperty("username")));
-		driver.findElement(By.id("inputPassword")).sendKeys((prop.getProperty("passwrd")));
-		driver.findElement(By.xpath("//button")).click();// locators file
-		Thread.sleep(5000);*/
-
-		// Create R.F.Q
 		
-	
-		
-		///////////////////////////////////////
-
-		// Edit R.F.Q ( Search and Edit)
-
-		driver.get(prop.getProperty("editturl"));
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
 		driver.findElement(By.xpath("//*[@id=\"customerQuotationsTable_filter\"]/label/input")).sendKeys((prop.getProperty("jobid")));
 		Thread.sleep(4000);
-		driver.findElement(By.xpath("//span[@title='Edit R.F.Q.']")).click();
-
-		/*// To upload files in edit RfQ
-		WebElement browse1 = driver.findElement(By.xpath("//*[@id=\"editOrderFilepUpload\"]"));
-		browse1.sendKeys("C:\\Users\\mallikarjuna.ss\\Desktop\\Umg test\\6002066_1\\6002066_1.pdf");
-		driver.findElement(By.xpath("//*[@id=\"saveModifiedOrder\"]/i")).click();
-		*/
+		driver.findElement(By.xpath("//*[@id=\"customerQuotationsTable\"]/tbody/tr/td[12]/div[1]/div[1]/span/i")).click();
+		
+	
 
 	
 		Thread.sleep(2000);
@@ -121,20 +94,9 @@ public class FirstTest1 {
 		WebElement option1 = select1.getFirstSelectedOption();
 		String defaultItem1 = option1.getText();
 	
-		/*//printing customer info
-		System.out.println(acc.getAttribute("value"));
-	    System.out.println(custdwg.getAttribute("value"));
-	    System.out.println(rfqdoc.getAttribute("value"));
-	    System.out.println(rfqdate.getAttribute("value"));
-	    System.out.println(rfqnum.getAttribute("value"));
-	    System.out.println(umgtocust.getAttribute("value"));
-	    System.out.println(defaultItem); 
-	    System.out.println(defaultItem1);*/
-		
 		
 		String ac = acc.getAttribute("value");
-		/*globalvariable.setAccountnum(ac);*/
-		
+	
 		String custdw=custdwg.getAttribute("value");
 		String rfqdo =rfqdoc.getAttribute("value");
 		String rfqdat =rfqdate.getAttribute("value");

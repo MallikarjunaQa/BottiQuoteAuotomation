@@ -48,25 +48,18 @@ public class PapaerWork {
 		driver.findElement(By.id("inputPassword")).sendKeys(prop.getProperty("umgpasswrd"));//comment umg
 */		
 		
-		driver.get(prop.getProperty("baseurl"));
-	    driver.findElement(By.id("inputEmail")).sendKeys(prop.getProperty("username"));
-		driver.findElement(By.id("inputPassword")).sendKeys(prop.getProperty("passwrd"));
-		
-		
+		driver.get(prop.getProperty("baseurl"));//
+		/*driver.findElement(By.xpath("//*[@id=\"details-button\"]")).click();//comment umg
+		driver.findElement(By.xpath("//*[@id=\"proceed-link\"]")).click();//comment umg
+*/		driver.findElement(By.id("inputEmail")).sendKeys(prop.getProperty("username"));//
+        driver.findElement(By.id("inputPassword")).sendKeys(prop.getProperty("passwrd"));
 		
 		driver.findElement(By.xpath("//button")).click();
-		
 	
-		Thread.sleep(8000);
-		WebElement element = driver.findElement(By.xpath("//button"));
-		Actions actions = new Actions(driver);
-		actions.click(element).build().perform();
-		
-		
+		Thread.sleep(5000);
 
+		driver.findElement(By.xpath("//*[@id=\"customerQuotationsTable_filter\"]/label/input")).sendKeys((prop.getProperty("jobid")));
 		Thread.sleep(4000);
-		   driver.findElement(By.xpath("//*[@id=\"customerQuotationsTable_filter\"]/label/input")).sendKeys(prop.getProperty("jobid"));
-		
 		driver.navigate().refresh(); 
 	       
 		Thread.sleep(4000);
@@ -74,10 +67,7 @@ public class PapaerWork {
 		
 		//clear all inputfrom feilds beofre updating
 		
-	/*	((JavascriptExecutor) driver).executeScript(document.getElementById('my-form').reset());*/
-	
-		/*driver.findElement(By.xpath("(//input[@type='number'])")).getSize();*/
-		Thread.sleep(2000);
+			Thread.sleep(2000);
 		for(int n=1; n<=20; n++) {
 			
 		driver.findElement(By.xpath("(//input[@type='number'])["+n+"]")).clear();
@@ -301,8 +291,6 @@ public class PapaerWork {
 	driver.findElement(By.xpath("//*[@id=\"body-row\"]/div[2]/div/div/div[1]/div/div/h5/a/i")).click();//back to datasheet
 	Thread.sleep(2000);
 	
-	/*driver.findElement(By.xpath("//input[@type='search']")).sendKeys(prop.getProperty("jobid"));
-	Thread.sleep(2000);*/
 	driver.findElement(By.xpath("//*[@id=\"customerQuotationsTable\"]/tbody/tr/td[12]/div[2]/div[3]")).click();
 	
 	
